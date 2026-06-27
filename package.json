@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node app.js",
-    "migrate": "node scripts/migrate_to_s3.js --help"
+    "prod": "NODE_ENV=production node app.js",
+    "migrate": "node scripts/migrate_to_s3.js --help",
+    "recount": "node scripts/recount_stats.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.556.0",
