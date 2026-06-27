@@ -1,0 +1,31 @@
+# 环境变量（敏感配置，请勿提交）
+.env
+
+# 依赖
+node_modules/
+
+# 日志
+*.log
+npm-debug.log*
+
+# 上传文件（音乐、图片等）
+uploads/
+
+# SQLite 数据库文件
+*.db
+*.sqlite
+
+# 编译输出
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# FFmpeg/FFprobe 路径配置（本地开发专用）
+ffmpeg-path.txt
