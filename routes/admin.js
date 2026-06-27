@@ -60,13 +60,26 @@ const multipartFilter = (req, file, cb) => {
 };
 
 /**
- * 根据 MIME/扩展名决定存储目录
+ * 根据 MIME/扩展名决定存储目录（严格分类）
+ * 图片 -> covers/（必须是图片 MIME 或图片扩展名）
+ * 歌词 -> lrc/（必须是 .lrc 扩展名或 text MIME）
+ * 音频 -> audio/
  */
 function destByMime(file) {
   const mime = file.mimetype || '';
   const ext = path.extname(file.originalname).toLowerCase();
-  if (mime.startsWith('image/') || IMAGE_EXTS.includes(ext)) return UPLOADS_COVER_DIR;
-  if (mime.startsWith('text/') || ext === '.lrc') return UPLOADS_LRC_DIR;
+
+  // 图片优先判断：必须明确是图片类型
+  if (mime.startsWith('image/') || IMAGE_EXTS.includes(ext)) {
+    return UPLOADS_COVER_DIR;
+  }
+
+  // 歌词文件：必须是 .lrc 扩展名或 text/plain MIME
+  if (ext === '.lrc' || mime === 'text/plain') {
+    return UPLOADS_LRC_DIR;
+  }
+
+  // 音频文件
   return path.join(UPLOADS_DIR, 'audio');
 }
 
